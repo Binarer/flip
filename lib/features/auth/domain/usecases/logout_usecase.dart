@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flip/core/error/error/failures.dart';
+import 'package:flip/core/error/failures.dart';
 import 'package:flip/features/auth/domain/repositories/sc_auth_repository.dart';
 import 'package:flip/features/auth/domain/repositories/vk_auth_repository.dart';
 
@@ -13,10 +13,35 @@ class LogoutUseCase {
   });
 
   Future<Either<Failure, void>> call() async {
-    final vkResult = await vkRepository.logout();
-    final scResult = await scRepository.logout();
+    // Execute both logouts in parallel and aggregate results
+    final results = await Future.wait([
+      vkRepository.logout(),
+      scRepository.logout(),
+    ]);
 
-    if (vkResult.isLeft()) return vkResult;
-    return scResult;
+    final vkResult = results[0];
+    final scResult = results[1];
+
+    // If both succeed, return success
+    if (vkResult.isRight() && scResult.isRight()) {
+      return const Right(null);
+    }
+
+    // Collect failures from both operations
+    Failure? combinedFailure;
+    
+    vkResult.fold(
+      (failure) => combinedFailure = failure,
+      (_) {},
+    );
+
+    if (combinedFailure == null) {
+      scResult.fold(
+        (failure) => combinedFailure = failure,
+        (_) {},
+      );
+    }
+
+    return Left(combinedFailure!);
   }
 }

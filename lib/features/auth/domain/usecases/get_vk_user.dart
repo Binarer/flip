@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flip/core/error/error/failures.dart';
+import 'package:flip/core/error/failures.dart';
 import 'package:flip/features/auth/data/models/User/vk_user.dart';
 import 'package:flip/features/auth/domain/repositories/vk_auth_repository.dart';
 

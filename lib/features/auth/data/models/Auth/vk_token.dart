@@ -10,7 +10,8 @@ class VKToken {
     required this.userId,
     required this.expiresIn,
     required this.scopes,
-  }) : expiresAt = DateTime.now().add(Duration(seconds: expiresIn));
+    DateTime? expiresAt,
+  }) : expiresAt = expiresAt ?? DateTime.now().add(Duration(seconds: expiresIn));
 
   bool get isValid => !isExpired && accessToken.isNotEmpty;
   bool get isExpired => DateTime.now().isAfter(expiresAt);
@@ -20,5 +21,14 @@ class VKToken {
     userId: json['user_id'] ?? 0,
     expiresIn: json['expires_in'] ?? 0,
     scopes: List<String>.from((json['scope'] ?? '').split(',')..remove('')),
+    expiresAt: json['expires_at'] != null ? DateTime.parse(json['expires_at'] as String) : null,
   );
+
+  Map<String, dynamic> toJson() => {
+    'access_token': accessToken,
+    'user_id': userId,
+    'expires_in': expiresIn,
+    'scope': scopes.join(','),
+    'expires_at': expiresAt.toIso8601String(),
+  };
 }

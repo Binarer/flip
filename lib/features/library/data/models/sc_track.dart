@@ -23,11 +23,18 @@ class SoundCloudTrack extends BaseTrack {
     title: json['title'] ?? '',
     artist: json['user']?['username'] ?? '',
     artworkUrl: json['artwork_url'],
-    duration: Duration(milliseconds: (json['duration'] ?? 0) as int),
+    duration: Duration(milliseconds: _parseDurationMs(json['duration'])),
     source: SourceType.soundcloud,
     permalinkUrl: json['permalink_url'] ?? '',
     streamUrl: json['stream_url'],
     userId: json['user_id'] ?? 0,
     waveformUrl: json['waveform_url'],
   );
+
+  static int _parseDurationMs(dynamic value) {
+    if (value == null) return 0;
+    if (value is int) return value;
+    if (value is double) return value.toInt();
+    return 0;
+  }
 }

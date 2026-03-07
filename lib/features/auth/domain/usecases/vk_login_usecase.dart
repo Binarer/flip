@@ -1,6 +1,6 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:flip/core/error/error/failures.dart';
+import 'package:flip/core/error/failures.dart';
 import 'package:flip/features/auth/data/models/Auth/vk_token.dart';
 import 'package:flip/features/auth/domain/repositories/vk_auth_repository.dart';
 

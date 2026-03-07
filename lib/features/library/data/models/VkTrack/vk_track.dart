@@ -18,8 +18,8 @@ class VKTrack extends BaseTrack {
     title: json['title'] ?? '',
     artist: json['artist'] ?? '',
     artworkUrl: json['album_art'] ?? json['thumb'] ?? '',
-    duration: Duration(milliseconds: (json['duration'] ?? 0) as int),
-    streamUrl: json['url'],
+    duration: Duration(seconds: (json['duration'] ?? 0) as int),
+    streamUrl: json['url'] ?? '',
     ownerId: json['owner_id'] ?? 0,
   );
 }

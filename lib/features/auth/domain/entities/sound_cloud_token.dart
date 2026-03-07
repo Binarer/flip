@@ -4,11 +4,12 @@ class SoundCloudToken {
   final int? expiresIn;
   final DateTime expiresAt;
 
-  SoundCloudToken({
+  const SoundCloudToken({
     required this.accessToken,
     this.refreshToken,
     this.expiresIn,
-  }) : expiresAt = DateTime.now().add(Duration(seconds: expiresIn ?? 3600));
+    required this.expiresAt,
+  });
 
   bool get isValid => !isExpired && accessToken.isNotEmpty;
   bool get isExpired => DateTime.now().isAfter(expiresAt);
@@ -17,5 +18,6 @@ class SoundCloudToken {
     accessToken: json['access_token'] ?? '',
     refreshToken: json['refresh_token'],
     expiresIn: json['expires_in'],
+    expiresAt: DateTime.now().add(Duration(seconds: json['expires_in'] ?? 3600)),
   );
 }

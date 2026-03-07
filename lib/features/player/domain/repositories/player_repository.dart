@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flip/core/error/error/failures.dart';
+import 'package:flip/core/error/failures.dart';
 import 'package:flip/core/entities/track.dart';
 import 'package:flip/features/player/data/models/PlayerState/player_state.dart';
 
