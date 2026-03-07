@@ -1,3 +1,5 @@
+import 'package:flip/core/entities/track.dart';
+
 enum PlaybackState { idle, loading, playing, paused, stopped, error }
 
 class PlayerStateModel {

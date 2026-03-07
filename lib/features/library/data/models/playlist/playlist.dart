@@ -1,3 +1,5 @@
+import 'package:flip/core/entities/track.dart';
+
 class PlaylistModel {
   final String id;
   final String title;

@@ -5,7 +5,7 @@ class VKToken {
   final DateTime expiresAt;
   final List<String> scopes;
 
-  const VKToken({
+  VKToken({
     required this.accessToken,
     required this.userId,
     required this.expiresIn,

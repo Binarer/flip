@@ -1,3 +1,5 @@
+import 'package:flip/core/entities/track.dart';
+
 class SearchResultModel {
   final List<BaseTrack> tracks;
   final int totalResults;
