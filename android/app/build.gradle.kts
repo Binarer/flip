@@ -20,14 +20,21 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.flip"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+    // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+    applicationId = "com.example.flip"
+    // You can update the following values to match your application needs.
+    // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+    minSdk = flutter.minSdkVersion
+    targetSdk = flutter.targetSdkVersion
+    versionCode = flutterVersionCode.toInt()
+    versionName = flutterVersionName
+
+    manifestPlaceholders += mapOf(
+        "VKIDClientID" to "YOUR_CLIENT_ID",
+        "VKIDClientSecret" to "YOUR_CLIENT_SECRET",
+        "VKIDRedirectHost" to "vk.com",
+        "VKIDRedirectScheme" to "vkYOUR_CLIENT_ID"
+    )
     }
 
     buildTypes {

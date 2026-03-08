@@ -1,7 +1,7 @@
 // lib/core/error/failures.dart
 
 /// Базовый тип ошибки домена.
-/// В domain/usecases и repositories используешь Either<Failure, T>.
+/// В domain/usecases и repositories используешь Either&lt;Failure, T&gt;.
 abstract class Failure {
   /// Технич. сообщение (для логов/дебага).
   final String message;

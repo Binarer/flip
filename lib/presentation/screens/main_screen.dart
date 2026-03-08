@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
+import 'package:flip/features/settings/presentation/screens/settings_screen.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -12,15 +14,16 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const Center(child: Text('Home')),
-    const Center(child: Text('Search')),
-    const Center(child: Text('Library')),
-    const Center(child: Text('Settings')),
+    const Scaffold(backgroundColor: Color(0xFF000000), body: Center(child: Text('Home'))),
+    const Scaffold(backgroundColor: Color(0xFF000000), body: Center(child: Text('Search'))),
+    const Scaffold(backgroundColor: Color(0xFF000000), body: Center(child: Text('Library'))),
+    const SettingsScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF000000),
       body: Stack(
         children: [
           _screens[_currentIndex],
@@ -60,15 +63,9 @@ class PlayerBarPlaceholder extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: theme.colorScheme.card,
+        color: const Color(0xFF0A0A0A),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFF1C1C1C)),
       ),
       child: Row(
         children: [
@@ -76,10 +73,10 @@ class PlayerBarPlaceholder extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: theme.colorScheme.muted,
+              color: const Color(0xFF1C1C1C),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.music_note),
+            child: const Icon(Icons.play_arrow_rounded, color: Colors.white),
           ),
           const SizedBox(width: 12),
           const Expanded(
@@ -89,18 +86,18 @@ class PlayerBarPlaceholder extends StatelessWidget {
               children: [
                 Text(
                   'Not Playing',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 Text(
                   'Select a track',
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 12, color: Color(0xFF71717A)),
                 ),
               ],
             ),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.play_arrow),
+            icon: const Icon(Icons.more_horiz_rounded, color: Colors.white),
           ),
         ],
       ),
@@ -125,15 +122,9 @@ class NavigationOverlay extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 24),
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: theme.colorScheme.card,
+        color: const Color(0xFF0A0A0A),
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFF1C1C1C)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -184,7 +175,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
-    final color = isSelected ? theme.colorScheme.primary : theme.colorScheme.mutedForeground;
+    final color = isSelected ? Colors.white : const Color(0xFF71717A);
     
     return GestureDetector(
       onTap: onTap,
@@ -192,7 +183,7 @@ class _NavItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: color),
+          Icon(icon, color: color, size: 22),
           const SizedBox(height: 4),
           Text(
             label,

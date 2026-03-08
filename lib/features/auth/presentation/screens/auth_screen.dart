@@ -17,8 +17,10 @@ class AuthScreen extends StatelessWidget {
           if (state is Authenticated) {
             context.go('/main');
           } else if (state is AuthError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+            ShadToaster.of(context).show(
+              ShadToast.destructive(
+                description: Text(state.message),
+              ),
             );
           }
         },
@@ -60,7 +62,7 @@ class AuthScreen extends StatelessWidget {
                           : () {
                               context.read<AuthBloc>().add(VKLoginPressed());
                             },
-                      icon: state is AuthLoading
+                      leading: state is AuthLoading
                           ? const SizedBox(
                               width: 20,
                               height: 20,

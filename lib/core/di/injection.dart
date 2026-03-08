@@ -13,6 +13,8 @@ import 'package:flip/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:flip/features/auth/domain/usecases/vk_login_usecase.dart';
 import 'package:flip/features/auth/presentation/blocs/auth_bloc.dart';
 
+import 'package:flip/features/auth/data/datasources/vk_auth_remote_datasource_impl.dart';
+
 class DI {
   static final DI _instance = DI._internal();
   factory DI() => _instance;
@@ -20,17 +22,21 @@ class DI {
 
   late final AuthBloc authBloc;
 
-  void init() {
+  Future<void> init() async {
     // Data Sources
-    final remoteDataSource = MockVKAuthRemoteDataSource();
+    final remoteDataSource = VKAuthRemoteDataSourceImpl();
     final localDataSource = MockAuthLocalDataSource();
+
+    // Initialize VK ID SDK
+    await remoteDataSource.initialize();
 
     // Repositories
     final vkAuthRepository = VKAuthRepositoryImpl(
       remoteDataSource: remoteDataSource,
       localDataSource: localDataSource,
     );
-    
+    ...
+
     final scAuthRepository = MockSoundCloudAuthRepository();
 
     // Use Cases
