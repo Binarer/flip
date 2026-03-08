@@ -13,7 +13,6 @@ void main() async {
   await DI().init();
   runApp(const FlipApp());
 }
-
 final _router = GoRouter(
   initialLocation: '/main',
   routes: [
